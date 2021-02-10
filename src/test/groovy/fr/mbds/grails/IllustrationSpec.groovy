@@ -1,9 +1,9 @@
-package grails_rest_ci
+package fr.mbds.grails
 
-import grails.testing.web.controllers.ControllerUnitTest
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class TestControllerSpec extends Specification implements ControllerUnitTest<TestController> {
+class IllustrationSpec extends Specification implements DomainUnitTest<Illustration> {
 
     def setup() {
     }

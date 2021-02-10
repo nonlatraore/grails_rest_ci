@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: grails_rest_ci
+        defaultPackage: fr.mbds.grails
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events
@@ -126,3 +126,13 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+
+# Changement du port de déploiement
+server:
+    port: 8081
+
+illustration:
+#    Accès via le système de fichier
+    path: C:/Users/gregg/Desktop/grails_rest_ci/grails-app/assets/images/
+#    Accès via l'adresse externe
+    url: http://localhost:8081/assets/
