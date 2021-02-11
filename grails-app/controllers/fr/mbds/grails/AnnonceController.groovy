@@ -1,13 +1,13 @@
 package fr.mbds.grails
 
+import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
+@Secured(value=["hasRole('ROLE_ADMIN')"])
 class AnnonceController {
 
     AnnonceService annonceService
-
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -48,11 +48,25 @@ class AnnonceController {
         respond annonceService.get(id)
     }
 
-    def update(Annonce annonce) {
+    def update() {
+        def annonce = Annonce.get(params.id)
         if (annonce == null) {
             notFound()
             return
         }
+        annonce.title = params.title
+        annonce.description = params.description
+        annonce.price = Float.parseFloat(params.price)
+
+        /**
+         * 1. On récupère le fichier depuis la requête (request)
+         * 2. On sauvegarde le fichier sur le systeme de fichier local (sur le disque)
+         *      - On génère un nom de fichier aléatoire et long
+         *      - On vérifie que le fichier n'est pas déjà présent sur le système de fichier
+         *      - Si tout est bon on peut sauvegarder le fichier reçu (request) sur le disque
+         * 3. On crée une instance d'Illustration associée à l'image que l'on a sauvegardé
+         * 4. On associe l'Illustration à l'annonce courante
+         */
 
         try {
             annonceService.save(annonce)
