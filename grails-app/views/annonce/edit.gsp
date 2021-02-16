@@ -33,7 +33,7 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:uploadForm controller="annonce" action="update" id="${annonce.id}">
+    <g:uploadForm controller="annonce" action="update" id="${annonce.id}" enctype="multipart/form-data">
         <g:hiddenField name="version" value="${this.annonce?.version}"/>
 
         <fieldset class="form">

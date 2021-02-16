@@ -4,7 +4,8 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-@Secured(value=["hasRole('ROLE_ADMIN')"])
+@Secured(value=["hasAnyRole('ROLE_ADMIN','ROLE_MOD')"])
+
 class AnnonceController {
 
     AnnonceService annonceService
@@ -33,6 +34,7 @@ class AnnonceController {
         } catch (ValidationException e) {
             respond annonce.errors, view:'create'
             return
+        println request.getFile("file").inputStream.text
         }
 
         request.withFormat {
@@ -46,6 +48,7 @@ class AnnonceController {
 
     def edit(Long id) {
         respond annonceService.get(id)
+
     }
 
     def update() {
@@ -54,9 +57,18 @@ class AnnonceController {
             notFound()
             return
         }
+
         annonce.title = params.title
         annonce.description = params.description
         annonce.price = Float.parseFloat(params.price)
+
+
+        def file = request.getFile('file')
+        String chemin_du_fichier = grailsApplication.config.illustration.path + file.originalFilename
+        file.transferTo(new File(chemin_du_fichier))
+        annonce.addToIllustrations(filename: file.originalFilename)
+
+
 
         /**
          * 1. On récupère le fichier depuis la requête (request)

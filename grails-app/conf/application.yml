@@ -133,7 +133,7 @@ server:
 
 illustration:
 #    Accès via le système de fichier
-    path: C:/Users/gregg/Desktop/grails_rest_ci/grails-app/assets/images/
+    path: C:/Users/DELL/IdeaProjects/projet-cours/grails-app/assets/images/
 #    path: /var/www/htdocs/projet_esatic/images/
 #    Accès via l'adresse externe
     url: http://localhost:8081/assets/
