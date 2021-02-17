@@ -8,15 +8,19 @@
     <content tag="nav">
                 <li><a href="annonce/index">Annonces List</a></li>
                 <li><a href="user/index">Users List</a></li>
-                <li><a href="login/index">Log in</a>
-                    <a href="logout/index">Log out</a>
+                <li><sec:ifLoggedIn>
+                        <g:link controller='logout' > <i class="icon icon-lock" ></i>Log out</g:link>
+                    </sec:ifLoggedIn>
+                    <sec:ifNotLoggedIn>
+                        <g:link controller='login' > <i class="icon icon-lock" ></i>Log in</g:link>
+                    </sec:ifNotLoggedIn>
                 </li>
 
     </content>
 
     <div class="svg" role="presentation">
         <div class="grails-logo-container">
-            <asset:image src="Leboncoin.PNG" class="grails-logo"/>
+            <asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>
         </div>
     </div>
 
