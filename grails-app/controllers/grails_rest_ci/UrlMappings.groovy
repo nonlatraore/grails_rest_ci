@@ -13,7 +13,7 @@ class UrlMappings {
         // $id = 1
         // $format = json
         "/test"(controller: "test", action: "index")
-
+        "/"(controller:'login', action: 'auth')
         "/"(view:"/index")
         "500"(view:'/error')
 
